@@ -13,7 +13,10 @@ document.getElementById('orderForm').addEventListener('input', function() {
         price = productPrices[product] * quantity;
     }
 
+    // Convert delivery charge to a number
     const deliveryCharge = delivery === 'inside' ? 80 : delivery === 'outside' ? 120 : 0;
+
+    // Add price and delivery charge as numbers
     const total = price + deliveryCharge;
 
     if (product && quantity && delivery) {
@@ -22,6 +25,7 @@ document.getElementById('orderForm').addEventListener('input', function() {
         document.getElementById('bill').innerText = '';
     }
 });
+
 
 document.getElementById('orderForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -101,7 +105,7 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
             document.getElementById('orderForm').reset();
             document.getElementById('bill').innerText = '';
             window.location.reload();
-        }, 2000); // Refresh the page after 2 seconds
+        }, 5000); // Refresh the page after 5 seconds
     })
     .catch(error => {
         console.error('Error:', error);
