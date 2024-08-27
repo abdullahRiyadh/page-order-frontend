@@ -1,32 +1,3 @@
-document.getElementById('orderForm').addEventListener('input', function() {
-    const productPrices = {
-        product1: 100,
-        product2: 200
-    };
-
-    const product = document.getElementById('product').value;
-    const quantity = parseInt(document.getElementById('quantity').value);
-    const delivery = document.getElementById('delivery').value;
-
-    let price = 0;
-    if (product && quantity) {
-        price = productPrices[product] * quantity;
-    }
-
-    // Convert delivery charge to a number
-    const deliveryCharge = delivery === 'inside' ? 80 : delivery === 'outside' ? 120 : 0;
-
-    // Add price and delivery charge as numbers
-    const total = price + deliveryCharge;
-
-    if (product && quantity && delivery) {
-        document.getElementById('bill').innerText = `প্রোডাক্ট মূল্য: ${price} টাকা\nডেলিভারি চার্জ: ${deliveryCharge} টাকা\nমোট মূল্য: ${total} টাকা`;
-    } else {
-        document.getElementById('bill').innerText = '';
-    }
-});
-
-
 document.getElementById('orderForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -37,6 +8,19 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
     const product = document.getElementById('product').value;
     const quantity = parseInt(document.getElementById('quantity').value);
     const delivery = document.getElementById('delivery').value;
+
+    // Calculate price
+    const productPrices = {
+        product1: 100,
+        product2: 200
+    };
+    let price = productPrices[product] * quantity;
+
+    // Calculate delivery charge
+    const deliveryCharge = delivery === 'inside' ? 80 : delivery === 'outside' ? 120 : 0;
+
+    // Calculate total price
+    const totalPrice = price + deliveryCharge;
 
     let errorMessage = '';
 
@@ -71,14 +55,6 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
     }
 
     // Prepare data for submission
-    const productPrices = {
-        product1: 100,
-        product2: 200
-    };
-    const price = productPrices[product] * quantity;
-    const deliveryCharge = delivery === 'inside' ? 80 : 120;
-    const total = price + deliveryCharge;
-
     const orderData = {
         name: name,
         mobile: mobile,
@@ -86,7 +62,7 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
         product: product,
         quantity: quantity,
         delivery: delivery,
-        total: total
+        price: totalPrice // Make sure price is included
     };
 
     // Submit data to backend
@@ -107,8 +83,5 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
             window.location.reload();
         }, 5000); // Refresh the page after 5 seconds
     })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('অর্ডার প্রক্রিয়াকরণে একটি ত্রুটি ঘটেছে। দয়া করে পরে আবার চেষ্টা করুন।');
-    });
+    .catch(error => console.error('Error:', error));
 });
