@@ -1,3 +1,33 @@
+document.getElementById('orderForm').addEventListener('input', function() {
+    // Product prices
+    const productPrices = {
+        product1: 100,
+        product2: 200
+    };
+
+    // Get field values
+    const product = document.getElementById('product').value;
+    const quantity = parseInt(document.getElementById('quantity').value) || 0; // Default to 0 if NaN
+    const delivery = document.getElementById('delivery').value;
+
+    // Calculate price
+    let price = productPrices[product] ? productPrices[product] * quantity : 0;
+
+    // Calculate delivery charge
+    const deliveryCharge = delivery === 'inside' ? 80 : delivery === 'outside' ? 120 : 0;
+
+    // Calculate total price
+    const totalPrice = price + deliveryCharge;
+
+    // Display bill
+    if (product && quantity > 0 && delivery) {
+        document.getElementById('bill').innerText = `প্রোডাক্ট মূল্য: ${price} টাকা\nডেলিভারি চার্জ: ${deliveryCharge} টাকা\nমোট মূল্য: ${totalPrice} টাকা`;
+    } else {
+        document.getElementById('bill').innerText = '';
+    }
+});
+
+// Form submission handling
 document.getElementById('orderForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -6,7 +36,7 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
     const mobile = document.getElementById('mobile').value.trim();
     const address = document.getElementById('address').value.trim();
     const product = document.getElementById('product').value;
-    const quantity = parseInt(document.getElementById('quantity').value);
+    const quantity = parseInt(document.getElementById('quantity').value) || 0; // Default to 0 if NaN
     const delivery = document.getElementById('delivery').value;
 
     // Calculate price
@@ -14,7 +44,7 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
         product1: 100,
         product2: 200
     };
-    let price = productPrices[product] * quantity;
+    let price = productPrices[product] ? productPrices[product] * quantity : 0;
 
     // Calculate delivery charge
     const deliveryCharge = delivery === 'inside' ? 80 : delivery === 'outside' ? 120 : 0;
@@ -62,7 +92,7 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
         product: product,
         quantity: quantity,
         delivery: delivery,
-        price: totalPrice // Make sure price is included
+        price: totalPrice // Ensure price is included
     };
 
     // Submit data to backend
