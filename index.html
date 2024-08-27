@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অর্ডার ফর্ম</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">অর্ডার ফর্ম</header>
+    <div class="container">
+        <h1>আপনার অর্ডার দিন</h1>
+        <form id="orderForm">
+            <label for="name">নাম:</label>
+            <input type="text" id="name" name="name"><br>
+            
+            <label for="mobile">মোবাইল নম্বর:</label>
+            <input type="text" id="mobile" name="mobile"><br>
+            
+            <label for="address">ঠিকানা:</label>
+            <textarea id="address" name="address"></textarea><br>
+            
+            <label for="product">প্রোডাক্ট:</label>
+            <select id="product" name="product">
+                <option value="" disabled selected>প্রোডাক্ট নির্বাচন করুন</option>
+                <option value="product1">প্রোডাক্ট ১</option>
+                <option value="product2">প্রোডাক্ট ২</option>
+            </select><br>
+            
+            <label for="quantity">পরিমাণ:</label>
+            <input type="number" id="quantity" name="quantity" min="1"><br>
+            
+            <label for="delivery">ডেলিভারি:</label>
+            <select id="delivery" name="delivery">
+                <option value="" disabled selected>ডেলিভারি নির্বাচন করুন</option>
+                <option value="inside">ঢাকা শহরের ভিতরে</option>
+                <option value="outside">ঢাকা শহরের বাইরে</option>
+            </select><br>
+
+            <div id="bill"></div><br>
+            <button type="submit">অর্ডার দিন</button>
+        </form>
+        <div id="confirmation" style="display:none;">আপনার অর্ডার সফলভাবে সম্পন্ন হয়েছে!</div>
+    </div>
+    <footer class="footer">ধন্যবাদ আমাদের সাথে থাকার জন্য</footer>
+    <script src="script.js"></script>
+</body>
+</html>
