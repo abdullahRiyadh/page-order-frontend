@@ -67,6 +67,14 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
     }
 
     // Prepare data for submission
+    const productPrices = {
+        product1: 100,
+        product2: 200
+    };
+    const price = productPrices[product] * quantity;
+    const deliveryCharge = delivery === 'inside' ? 80 : 120;
+    const total = price + deliveryCharge;
+
     const orderData = {
         name: name,
         mobile: mobile,
@@ -74,7 +82,7 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
         product: product,
         quantity: quantity,
         delivery: delivery,
-        price: parseInt(document.getElementById('bill').innerText.replace(/\D/g, ''))
+        total: total
     };
 
     // Submit data to backend
@@ -95,5 +103,8 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
             window.location.reload();
         }, 2000); // Refresh the page after 2 seconds
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+        alert('অর্ডার প্রক্রিয়াকরণে একটি ত্রুটি ঘটেছে। দয়া করে পরে আবার চেষ্টা করুন।');
+    });
 });
